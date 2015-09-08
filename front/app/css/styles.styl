@@ -1,3 +1,13 @@
+// mixins
+
+box-sizing(prop = border-box)
+    -moz-box-sizing prop
+    -webkit-box-sizing prop
+    box-sizing prop
+
+
+// styles
+
 body,
 html
     margin 0
@@ -9,10 +19,17 @@ html
 
 
 $homeToolbarHeight = 50px
+$homeToolbarButtonWidth = 100px
 
 .home
     position relative
     width 100%
+    height 100%
+
+
+ui-gmap-google-map,
+.angular-google-map,
+.angular-google-map-container
     height 100%
 
 +prefix-classes('home__')
@@ -24,3 +41,18 @@ $homeToolbarHeight = 50px
     .toolbar
         width 100%
         height $homeToolbarHeight
+
+        input
+            width "calc(100% - 2 * %s)" % $homeToolbarButtonWidth
+            height 100%
+            box-sizing()
+            float left
+            padding-left 10px
+
+        button
+            width $homeToolbarButtonWidth
+            height 100%
+            box-sizing()
+            float left
+
+
