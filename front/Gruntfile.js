@@ -36,6 +36,24 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        jshint: {
+            app: {
+                src: 'app/**/*.js'
+            }
+        },
+        concat: {
+            app: {
+                options: {
+                    sourceMap: true,
+                    sourceMapName: 'dist/app.map'
+                },
+                files: {
+                    'dist/app.js': [
+                        'app/*/**/*.js'
+                    ]
+                }
+            }
+        },
         nodemon: {
             dev: {
                 script: 'server.js',
@@ -46,12 +64,52 @@ module.exports = function (grunt) {
                 }
             }
         },
+        watch: {
+            stylus: {
+                files: '**/*.styl',
+                tasks: 'stylus',
+                options: {
+                    spawn: true,
+                    cwd: 'app/css/'
+                }
+            },
+            js: {
+                files: ['**/*.js'],
+                tasks: [
+                    'jshint',
+                    'concat'
+                ],
+                options: {
+                    spawn: true,
+                    cwd: 'app/js/'
+                }
+            },
+            jade: {
+                files: '**/*.jade',
+                tasks: [
+                    'jade'
+                ],
+                options: {
+                    spawn: true,
+                    cwd: 'app/'
+                }
+            }
+        },
         concurrent: {
             server: {
                 options: {
                     logConcurrentOutput: true
                 },
-                tasks: ['nodemon']
+                tasks: ['nodemon', 'watch']
+            }
+        },
+        bower_concat: {
+            all: {
+                dest: 'dist/lib.js',
+                cssDest: 'dist/lib.css',
+                bowerOptions: {
+                    relative: false
+                }
             }
         }
     });
@@ -61,9 +119,11 @@ module.exports = function (grunt) {
             'clean',
             'jade',
             'stylus',
+            'jshint',
+            'concat',
+            'bower_concat',
             'concurrent'
         ];
-
         grunt.task.run(tasks);
     });
 
