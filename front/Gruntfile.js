@@ -20,6 +20,22 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        stylus: {
+            compile: {
+                options: {
+                    sourcemap: {
+                        inline: true
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'app/',
+                    src: '**/*.styl',
+                    dest: 'dist/',
+                    ext: '.css'
+                }]
+            }
+        },
         nodemon: {
             dev: {
                 script: 'server.js',
@@ -44,6 +60,7 @@ module.exports = function (grunt) {
         var tasks = [
             'clean',
             'jade',
+            'stylus',
             'concurrent'
         ];
 
