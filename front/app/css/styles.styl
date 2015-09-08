@@ -21,15 +21,14 @@ html
 $homeToolbarHeight = 50px
 $homeToolbarButtonWidth = 100px
 
-.home
-    position relative
-    width 100%
-    height 100%
-
-
 ui-gmap-google-map,
 .angular-google-map,
 .angular-google-map-container
+    height 100%
+
+.home
+    position relative
+    width 100%
     height 100%
 
 +prefix-classes('home__')
@@ -55,4 +54,35 @@ ui-gmap-google-map,
             box-sizing()
             float left
 
+$historyButtonPadding = 5px 10px
 
+.history
+    position relative
+    width 100%
+    height 100%
+
++prefix-classes('history__')
+    
+    a
+        box-sizing()
+        padding $historyButtonPadding
+        text-decoration none
+        color black
+        display inline-block
+
+        &:hover
+            text-decoration underline
+
+    .back,
+    .list
+        text-transform uppercase
+        display block
+
+    .list
+        width 100%
+        padding 0
+        margin 0
+        list-style none
+
+        li
+            border-top 1px solid black

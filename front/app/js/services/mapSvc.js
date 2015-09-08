@@ -1,15 +1,25 @@
 app.service('mapSvc', function () {
 
-	function _getCityCoordinates(cityName) {
+	function _cityCoordinates(cityName) {
 		// body...
 	}
 
-	function _getTweets(argument) {
+	function _tweets(argument) {
 		// body...
+	}
+
+	function _recentSearch() {
+		return [
+			'Tbilisi',
+			'London',
+			'Moscow',
+			'New york'
+		];
 	}
 
 	return {
-		getCityCoordinates: _getCityCoordinates,
-		getTweets: _getTweets
+		cityCoordinates: _cityCoordinates,
+		tweets: _tweets,
+		recentSearch: _recentSearch
 	};
 });

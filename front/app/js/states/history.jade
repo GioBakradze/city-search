@@ -1,1 +1,6 @@
-p history state
+.history
+	a.history__back(ui-sref="home") << back to the tweets!
+	ul.history__list
+		li(ng-repeat="item in recentSearch")
+			a(ui-sref="home({ cityName: item })") {{item}}
+

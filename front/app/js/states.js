@@ -2,7 +2,7 @@ app.config(function($stateProvider) {
 
     $stateProvider
         .state('home', {
-            url: '/',
+            url: '/home/:cityName',
             templateUrl: '/js/states/home.html',
             controller: 'home'
         })
