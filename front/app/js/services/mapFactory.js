@@ -1,4 +1,4 @@
-app.service('mapSvc', function () {
+app.factory('mapFactory', function () {
 
 	function _cityCoordinates(cityName) {
 		// body...

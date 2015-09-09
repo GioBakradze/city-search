@@ -1,4 +1,4 @@
-app.controller('home', function($scope, $state, $stateParams, mapSvc) {
+app.controller('home', function($scope, $state, $stateParams, mapFactory, $localStorage) {
     console.log('home controller in action ' + $stateParams.cityName);
 
     $scope.map = {
