@@ -2,7 +2,7 @@ app.factory('mapFactory', function($http, API_URL) {
 
     function _cityCoordinates(cityName) {
         $http.get(API_URL + '/city/' + cityName).then(function(data) {
-            console.log(data);
+            console.log(data.data);
         });
     }
 

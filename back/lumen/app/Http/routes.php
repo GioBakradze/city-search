@@ -12,11 +12,9 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->welcome();
+    return 'Welcome To CitySearch backend API';
 });
 
-$app->get('/me', function () use ($app) {
-    return uniqid();
-});
+$app->get('/me', 'MeController@getToken');
 
 $app->get('/city/{cityName}', 'CityController@cityCoordinates');
