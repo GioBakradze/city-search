@@ -1,25 +1,27 @@
-app.factory('mapFactory', function () {
+app.factory('mapFactory', function($http, API_URL) {
 
-	function _cityCoordinates(cityName) {
-		// body...
-	}
+    function _cityCoordinates(cityName) {
+        $http.get(API_URL + '/city/' + cityName).then(function(data) {
+            console.log(data);
+        });
+    }
 
-	function _tweets(argument) {
-		// body...
-	}
+    function _tweets(argument) {
+        // body...
+    }
 
-	function _recentSearch() {
-		return [
-			'Tbilisi',
-			'London',
-			'Moscow',
-			'New york'
-		];
-	}
+    function _recentSearch() {
+        return [
+            'Tbilisi',
+            'London',
+            'Moscow',
+            'New york'
+        ];
+    }
 
-	return {
-		cityCoordinates: _cityCoordinates,
-		tweets: _tweets,
-		recentSearch: _recentSearch
-	};
+    return {
+        cityCoordinates: _cityCoordinates,
+        tweets: _tweets,
+        recentSearch: _recentSearch
+    };
 });

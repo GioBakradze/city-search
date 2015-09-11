@@ -18,3 +18,5 @@ $app->get('/', function () use ($app) {
 $app->get('/me', function () use ($app) {
     return uniqid();
 });
+
+$app->get('/city/{cityName}', 'CityController@cityCoordinates');

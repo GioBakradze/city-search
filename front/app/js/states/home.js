@@ -19,7 +19,7 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
     		return;
     	}
 
-    	// perform search
+    	mapFactory.cityCoordinates($scope.city);
     };
 
     $scope.city = $stateParams.cityName;

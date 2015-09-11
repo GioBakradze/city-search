@@ -1,6 +1,6 @@
-app.controller('history', function ($scope, mapSvc) {
+app.controller('history', function ($scope, mapFactory) {
     console.log('history controller in action');
 
-    $scope.recentSearch = mapSvc.recentSearch();
+    $scope.recentSearch = mapFactory.recentSearch();
 
 });
