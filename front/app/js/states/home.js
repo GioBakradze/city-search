@@ -1,12 +1,11 @@
 app.controller('home', function($scope, $state, $stateParams, mapFactory, $localStorage) {
-    console.log('home controller in action ' + $stateParams.cityName);
 
     $scope.map = {
         center: {
-            latitude: 45,
-            longitude: -73
+            latitude: 13.7563309,
+            longitude: 100.5017651
         },
-        zoom: 8
+        zoom: 10
     };
 
     $scope.history = function () {
@@ -17,9 +16,14 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
     	if ($scope.city.trim().length === 0)  {
     		 if(validate) alert('Please type city name');
     		return;
-    	}
+    	}        
 
-    	mapFactory.cityCoordinates($scope.city);
+    	mapFactory.cityCoordinates($scope.city).then(function (data) {
+            $scope.map.center.latitude = data[0].geometry.location.lat;
+            $scope.map.center.longitude = data[0].geometry.location.lng;
+        }, function (msg) {
+            alert(msg);
+        });
     };
 
     $scope.city = $stateParams.cityName;

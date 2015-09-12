@@ -1,7 +1,7 @@
 .home
     .home__map
         ui-gmap-google-map(center='map.center', zoom='map.zoom')
-    .home__toolbar
+    form.home__toolbar(ng-submit="search(true)")
         input(type="text", ng-model="city")
-        button(ng-click="search(true)") Search
-        button(ng-click="history()") View History
+        button(type="submit") Search
+        button(type="button", ng-click="history()") View History
