@@ -16,11 +16,11 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
     	if ($scope.city.trim().length === 0)  {
     		 if(validate) alert('Please type city name');
     		return;
-    	}        
+    	}
 
-    	mapFactory.cityCoordinates($scope.city).then(function (data) {
-            $scope.map.center.latitude = data[0].geometry.location.lat;
-            $scope.map.center.longitude = data[0].geometry.location.lng;
+    	mapFactory.city($scope.city).then(function (data) {
+            $scope.map.center.latitude = data.map.results[0].geometry.location.lat;
+            $scope.map.center.longitude = data.map.results[0].geometry.location.lng;            
         }, function (msg) {
             alert(msg);
         });

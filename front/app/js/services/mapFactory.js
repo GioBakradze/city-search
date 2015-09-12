@@ -1,20 +1,16 @@
 app.factory('mapFactory', function($http, API_URL, $q) {
 
-    function _cityCoordinates(cityName) {
+    function _city(cityName) {
         var def = $q.defer();
         $http.get(API_URL + '/city/' + cityName).then(function(data) {
-            if (data.data.status === 'ZERO_RESULTS') {
+            if (data.data === 'CITY_NOT_FOUND') {
                 def.reject('City with this name was not found');
             } else {
-                def.resolve(data.data.results);
+                def.resolve(data.data);
             }
         });
 
         return def.promise;
-    }
-
-    function _tweets(argument) {
-        // body...
     }
 
     function _recentSearch() {
@@ -27,8 +23,7 @@ app.factory('mapFactory', function($http, API_URL, $q) {
     }
 
     return {
-        cityCoordinates: _cityCoordinates,
-        tweets: _tweets,
+        city: _city,
         recentSearch: _recentSearch
     };
 });
