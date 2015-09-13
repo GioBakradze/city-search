@@ -1,5 +1,8 @@
 app.controller('home', function($scope, $state, $stateParams, mapFactory, $localStorage) {
 
+    $scope.showTitle = false;
+    $scope.titleText = '';
+
     $scope.map = {
         center: {
             latitude: 13.7563309,
@@ -21,6 +24,9 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
     	}
 
     	mapFactory.city($scope.city).then(function (data) {
+            // update map basic data
+            $scope.showTitle = true;
+            $scope.titleText = $scope.city;
             $scope.map.center.latitude = data.map.results[0].geometry.location.lat;
             $scope.map.center.longitude = data.map.results[0].geometry.location.lng;
 
@@ -28,6 +34,7 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
             var marks = [];
             var added = {};
 
+            // fill markers array with necessary data
             angular.forEach(data.tweets.statuses, function  (e, i) {
                 if (e.geo !== null && !added.hasOwnProperty(e.geo.coordinates[0] + ',' + e.geo.coordinates[1])) {
                     marks.push({
@@ -45,8 +52,11 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
                 }
             });
 
+            // update markers model
             $scope.markers = marks;
         }, function (msg) {
+            // no results
+            $scope.showTitle = false;
             alert(msg);
         });
     };

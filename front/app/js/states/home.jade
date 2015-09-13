@@ -1,4 +1,7 @@
 .home
+    
+    .home__title(ng-show="showTitle")
+        span Tweets about {{titleText}}
 
     .home__map
         ui-gmap-google-map(center="map.center", zoom="map.zoom")
