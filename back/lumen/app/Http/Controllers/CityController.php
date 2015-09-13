@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\MapService as MapService;
 use App\Services\TwitterService as TwitterService;
 
-
 class CityController extends Controller {
 
     /**
@@ -27,6 +26,7 @@ class CityController extends Controller {
      * @return Response
      */
     public function city($cityName, MapService $map, TwitterService $twitter) {
+
         $data = array();
 
         $data['map'] = json_decode($map->getCityCoordinates($cityName));
@@ -38,8 +38,7 @@ class CityController extends Controller {
         $data['tweets'] = json_decode($twitter->getTweetsAboutCity(
                 $cityName, 
                 $data['map']->results[0]->geometry->location->lat,
-                $data['map']->results[0]->geometry->location->lng,
-                '50'
+                $data['map']->results[0]->geometry->location->lng
             ));
 
         return json_encode($data);
