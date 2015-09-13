@@ -18,3 +18,5 @@ $app->get('/', function () use ($app) {
 $app->get('/me', 'MeController@getToken');
 
 $app->get('/city/{cityName}', 'CityController@city');
+
+$app->get('/history', 'CityController@history');

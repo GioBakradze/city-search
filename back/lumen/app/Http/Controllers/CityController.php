@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\MapService as MapService;
 use App\Services\TwitterService as TwitterService;
+use Illuminate\Http\Request;
 
 class CityController extends Controller {
 
@@ -23,13 +24,15 @@ class CityController extends Controller {
      * @param  MapService  $map
      * @param  TwitterService  $twitter
      * @param  string  $cityName
+     * @param  Request  $request
      * @return Response
      */
-    public function city($cityName, MapService $map, TwitterService $twitter) {
+    public function city($cityName, MapService $map, TwitterService $twitter, Request  $request) {
+
 
         $data = array();
 
-        $data['map'] = json_decode($map->getCityCoordinates($cityName));
+        $data['map'] = json_decode($map->getCityCoordinates($cityName, $request->header('token')));
 
         if ($data['map']->status == 'ZERO_RESULTS') {
             return 'CITY_NOT_FOUND';
@@ -42,5 +45,16 @@ class CityController extends Controller {
             ));
 
         return json_encode($data);
+    }
+
+    /**
+     * Returns search history  for given user
+     *
+     * @param  MapService  $map
+     * @param  Request  $request
+     * @return Response
+     */
+    public function history(MapService $map, Request  $request) {
+        return $map->history($request->header('token'));
     }
 }

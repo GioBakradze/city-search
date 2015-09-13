@@ -1,6 +1,15 @@
 app.controller('history', function ($scope, mapFactory) {
-    console.log('history controller in action');
 
-    $scope.recentSearch = mapFactory.recentSearch();
+    $scope.recentSearch = []; 
+
+    // to display space character containing
+    // city names
+    $scope.display = function (item) {
+    	return window.decodeURIComponent(item);
+    };
+
+    mapFactory.recentSearch().then(function (data) {
+    	$scope.recentSearch = data;
+    });
 
 });

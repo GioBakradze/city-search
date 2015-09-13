@@ -14,12 +14,11 @@ app.factory('mapFactory', function($http, API_URL, $q) {
     }
 
     function _recentSearch() {
-        return [
-            'Tbilisi',
-            'London',
-            'Moscow',
-            'New york'
-        ];
+        var def = $q.defer();
+        $http.get(API_URL + '/history').then(function(data) {
+            def.resolve(data.data);
+        });
+        return def.promise;
     }
 
     return {
