@@ -1,6 +1,9 @@
 .home
+
     .home__map
-        ui-gmap-google-map(center='map.center', zoom='map.zoom')
+        ui-gmap-google-map(center="map.center", zoom="map.zoom")
+            ui-gmap-markers(models="markers", coords="'coords'")
+
     form.home__toolbar(ng-submit="search(true)")
         input(type="text", ng-model="city")
         button(type="submit") Search

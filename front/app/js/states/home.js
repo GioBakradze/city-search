@@ -8,6 +8,8 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
         zoom: 10
     };
 
+    $scope.markers = [];
+
     $scope.history = function () {
     	$state.go('history');
     };
@@ -20,7 +22,22 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
 
     	mapFactory.city($scope.city).then(function (data) {
             $scope.map.center.latitude = data.map.results[0].geometry.location.lat;
-            $scope.map.center.longitude = data.map.results[0].geometry.location.lng;            
+            $scope.map.center.longitude = data.map.results[0].geometry.location.lng;
+
+            // create new markers array
+            var marks = [];
+
+            angular.forEach(data.tweets.statuses, function  (e, i) {
+                marks.push({
+                    coords: {
+                        latitude: e.geo.coordinates[0],
+                        longitude: e.geo.coordinates[1]
+                    },
+                    id: i
+                });
+            });
+
+            $scope.markers = marks;
         }, function (msg) {
             alert(msg);
         });
