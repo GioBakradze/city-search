@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     sourcemap: {
-                        inline: true
+                        // inline: true
                     }
                 },
                 files: [{
@@ -44,8 +44,8 @@ module.exports = function (grunt) {
         concat: {
             app: {
                 options: {
-                    sourceMap: true,
-                    sourceMapName: 'dist/app.map'
+                    // sourceMap: true,
+                    // sourceMapName: 'dist/app.map'
                 },
                 files: {
                     'dist/app.js': [
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
         bower_concat: {
             all: {
                 dest: 'dist/lib.js',
-                cssDest: 'dist/lib.css',
+                cssDest: 'dist/css/lib.css',
                 bowerOptions: {
                     relative: false
                 }

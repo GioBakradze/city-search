@@ -26,15 +26,23 @@ app.controller('home', function($scope, $state, $stateParams, mapFactory, $local
 
             // create new markers array
             var marks = [];
+            var added = {};
 
             angular.forEach(data.tweets.statuses, function  (e, i) {
-                marks.push({
-                    coords: {
-                        latitude: e.geo.coordinates[0],
-                        longitude: e.geo.coordinates[1]
-                    },
-                    id: i
-                });
+                if (e.geo !== null && !added.hasOwnProperty(e.geo.coordinates[0] + ',' + e.geo.coordinates[1])) {
+                    marks.push({
+                        coords: {
+                            latitude: e.geo.coordinates[0],
+                            longitude: e.geo.coordinates[1]
+                        },
+                        title: e.text,
+                        id: i,
+                        show: false,
+                        image: e.user.profile_image_url
+                    });
+
+                    added[e.geo.coordinates[0] + ',' + e.geo.coordinates[1]] = true;
+                }
             });
 
             $scope.markers = marks;
